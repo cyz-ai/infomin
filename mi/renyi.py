@@ -35,7 +35,7 @@ class RenyiInfominLayer(base.BaseInfominLayer):
 
     # the neural renyi value
     def objective_func(self, z1, z2):
-        return renyi_min_neural(z1, z2, self)
+        return renyi_min_neural(self, z1, z2)
 
     def learn(self, z1, z2):
         return base.OptimizationHelper.optimize(self, z1, z2)

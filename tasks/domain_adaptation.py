@@ -34,6 +34,12 @@ class DomainAdaptation(nn.Module):
             return mi.RenyiInfominLayer([self.dim_z_content, 256, self.dim_z_domain], hyperparams)
         if hyperparams.estimator == 'TC':
             return mi.TCInfominLayer(self.dim_z_content, self.dim_z_domain, hyperparams=hyperparams)
+        if hyperparams.estimator == 'DC':
+            return mi.DCInfominLayer(hyperparams=hyperparams)
+        if hyperparams.estimator == 'PEARSON':
+            return mi.PearsonInfominLayer(hyperparams=hyperparams)
+        if hyperparams.estimator == 'NONE':
+            return mi.NonparamInfominLayer(hyperparams=hyperparams)
         return infomin_layer
 
     def non_infomin_module(self):

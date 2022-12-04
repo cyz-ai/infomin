@@ -31,6 +31,12 @@ class Autoencoder(nn.Module):
             return mi.RenyiInfominLayer([self.dim_learnt, 256, self.dim_expert], hyperparams)
         if hyperparams.estimator == 'TC':
             return mi.TCInfominLayer(self.dim_learnt, self.dim_expert, hyperparams=hyperparams)
+        if hyperparams.estimator == 'DC':
+            return mi.DCInfominLayer(hyperparams=hyperparams)
+        if hyperparams.estimator == 'PEARSON':
+            return mi.PearsonInfominLayer(hyperparams=hyperparams)
+        if hyperparams.estimator == 'NONE':
+            return mi.NonparamInfominLayer(hyperparams=hyperparams)
         raise ValueError('non-supported mi proxy/estimator')
 
     def non_infomin_module(self):

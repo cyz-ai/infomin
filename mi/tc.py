@@ -10,7 +10,7 @@ class TCInfominLayer(base.BaseInfominLayer):
         sub-network used in infomin learning, estimate I(Z; T) by a classifier
     '''
     def __init__(self, dim_x, dim_y, dim_hidden=100, hyperparams=None):
-        super().__init__()
+        super().__init__(hyperparams=hyperparams)
         self.main = nn.Sequential(
             nn.Linear(dim_x + dim_y, dim_hidden),
             nn.ReLU(),
