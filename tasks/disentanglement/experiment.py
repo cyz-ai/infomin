@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from components import EncoderAE, Decoder, Classifier
+from neural_nets import EncoderAE, Decoder, Classifier
 import mi
 
 

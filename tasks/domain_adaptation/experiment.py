@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from components import EncoderDA, Decoder, Classifier
+from neural_nets import EncoderDA, Decoder, Classifier
 import mi
 
 
