@@ -15,7 +15,7 @@ We consider learning representation with the following objective:
 $$\min L(f(X), Y) - \beta \cdot I(f(X); T)$$
 where $L$ is some loss (e.g. BCE) and $I$ is the mutual information. This objective is ubiquitous in fairness, invariance, disentangled representation learning, domain adaptation, etc. In the figure above, $Y$ is the digit and $T$ is the color.  
 
-To optimise this objective, traditionally we need to (re-)estimate $I$ before every update to $f$. However estimating $I$ is challenging. We show we indeed need not to estimate $I$ to minimise it: just consider random `slices' of it is enough.
+To optimise this objective, traditionally we need to (re-)estimate $I$ before every update to $f$. However estimating $I$ is challenging. We show to minimise $I$ we indeed need not to estimate it: just consider random `slices' of it is enough.
 
 
 ## Materials
