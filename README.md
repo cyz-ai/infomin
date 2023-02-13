@@ -74,3 +74,14 @@ at /tasks
 * Fairness
 * Disentangled representation learning
 * Domain adaptation
+
+## Results
+
+
+
+<p align="center"><img width="90%" src="materials/result_DA.png" /></p>
+
+
+<p align="center"><img width="90%" src="materials/result_disentanglement.png" /></p>
+
+
