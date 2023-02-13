@@ -1,6 +1,6 @@
 # Infomin Representation Learning
 
-<p align="center"><img width="60%" src="materials/thumbnail.png" /></p>
+<p align="center"><img width="60%" src="materials/front.png" /></p>
 
 --------------------------------------------------------------------------------
 This repository provides a PyTorch implementation of "Scalable Infomin Learning" [Paper](https://openreview.net/pdf?id=Ojakr9ofova), NeurIPS 2022.
