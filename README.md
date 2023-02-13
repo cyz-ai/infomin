@@ -24,7 +24,7 @@ To optimise this objective, traditionally we need to (re-)estimate $I$ before ev
 
 * [Slides](materials/slides.pdf)
 * [Poster](materials/poster.png)
-* [Demo](demo_mi_minimization.ipynb)
+* [Demo](demo.ipynb)
 
 
 
