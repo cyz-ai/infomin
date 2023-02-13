@@ -14,12 +14,13 @@ where $I$ is the mutual information. This objective is ubiquitous in fairness, d
 
 Traditionally we need to (re-)estimate $I$ first before every update to $f$, which is usually done by training a neural net. This leads to an annoying minmax problem similar to GAN. We show that minmax learning is indeed not needed.
 
-
-## Materials
+Also see the materials below:
 
 * [Paper](https://openreview.net/pdf?id=Ojakr9ofova)
 * [Slides](materials/slides.pdf)
 * [Poster](materials/poster.png)
+* [Video](https://slideslive.com/38992225/scalable-infomin-learning?ref=speaker-17343)
+* [Demo](demo_mi_minimization.ipynb)
 
 
 
@@ -33,7 +34,10 @@ Traditionally we need to (re-)estimate $I$ first before every update to $f$, whi
 * Torchvision 0.13.1
 * Numpy, scipy, matplotlib
 
-We recommend to use conda to update library dependence. 
+We strongly recommend to use conda to manage/update library dependence:
+```
+conda install pytorch torchvision matplotlib
+```
 
 
 
