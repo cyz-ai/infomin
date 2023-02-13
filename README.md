@@ -54,7 +54,7 @@ at /mi
 * Neural Total Correlation
 * Neural Renyi Correlation
 * CLUB
-* Slice method 
+* Sliced independence testing
 
 
 
