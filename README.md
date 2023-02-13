@@ -10,9 +10,11 @@ This repository provides a PyTorch implementation of "Scalable Infomin Learning"
 ## Introduction
 We consider learning representation with the following objective:
 $$\min L(f(X), Y) - \beta \cdot I(f(X); T)$$
-where $L$ is some loss and $I$ is the mutual information. This objective is ubiquitous in fairness, invariance, disentangledment, domain adaptation.
+where $L$ is some loss and $I$ is the mutual information. This objective is ubiquitous in fairness, disentangledment, domain adaptation.
 
-Traditionally we need to (re-)estimate $I$ first before every update to $f$, which is usually done by training a neural net to quantify $I$ (or its proxy). This leads to an annoying minmax problem similar to GAN. We show we can minimise $I$ without estimating it, throwing away minmax learning.
+Traditionally we need to (re-)estimate $I$ first before every update to $f$, which is usually done by training a neural net to quantify $I$ (or its proxy). This leads to an annoying minmax problem similar to GAN. 
+
+We show we can minimise $I$ without estimating it, throwing away minmax learning.
 
 
 ## Materials
