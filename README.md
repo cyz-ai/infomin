@@ -3,7 +3,10 @@
 <p align="center"><img width="60%" src="materials/front.png" /></p>
 
 --------------------------------------------------------------------------------
-This repository provides a PyTorch implementation of "Scalable Infomin Learning" [Paper](https://openreview.net/pdf?id=Ojakr9ofova), NeurIPS 2022.
+This repository provides a PyTorch implementation of the paper ["Scalable Infomin Learning"](https://openreview.net/pdf?id=Ojakr9ofova), NeurIPS 2022.
+
+
+
 
 
 
@@ -14,13 +17,13 @@ where $L$ is some loss (e.g. prediction loss) and $I$ is the mutual information.
 
 Traditionally we need to (re-)estimate $I$ first before every update to $f$, which is usually done by training a neural net. This leads to an annoying minmax problem similar to GAN. We show that minmax learning is indeed not needed.
 
-Also see the materials below:
 
-* [Paper](https://openreview.net/pdf?id=Ojakr9ofova)
+## Materials
+
 * [Slides](materials/slides.pdf)
 * [Poster](materials/poster.png)
-* [Video](https://slideslive.com/38992225/scalable-infomin-learning?ref=speaker-17343)
 * [Demo](demo_mi_minimization.ipynb)
+
 
 
 
