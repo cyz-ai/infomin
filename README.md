@@ -1,9 +1,9 @@
-# Scalable Infomin Learning
+# Infomin Representation Learning
 
 <p align="center"><img width="60%" src="materials/thumbnail.png" /></p>
 
 --------------------------------------------------------------------------------
-This repository provides a PyTorch implementation of "Scalable Infomin Learning" [Paper](https://openreview.net/pdf?id=Ojakr9ofova), NeurIPS 2022, with applications in fairness, disentanglement, domain adaptation, etc.
+This repository provides a PyTorch implementation of "Scalable Infomin Learning" [Paper](https://openreview.net/pdf?id=Ojakr9ofova), NeurIPS 2022.
 
 
 
@@ -39,16 +39,14 @@ bash scripts/download_pie.sh
 
 
 
-## I(Z; T) estimators/proxies
+## MI estimators/proxies
 
 at /mi
 
-* Pearson correlation
-* Distance correlation
-* Neural total correlation 
-* Neural Renyi correlation
-* CLUB
-* Slice mutual information 
+* Nonparametric methods: Pearson correlation, distance correlation
+* Neural estimators: neural total correlation, neural Renyi correlation
+* Variational estimator: CLUB
+* Slice method 
 
 
 ## Applications
