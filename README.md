@@ -32,6 +32,7 @@ Traditionally we need to (re-)estimate $I$ first before every update to $f$, whi
 * Pytorch 1.12.1
 * Torchvision 0.13.1
 * Numpy, scipy, matplotlib
+
 We recommend to use conda to update library dependence. 
 
 
@@ -54,7 +55,7 @@ at /mi
 * Neural Total Correlation
 * Neural Renyi Correlation
 * CLUB
-* Sliced independence testing
+* Sliced independence testing (*ours)
 
 
 
