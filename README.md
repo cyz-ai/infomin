@@ -15,7 +15,7 @@ We consider learning representation with the following objective:
 $$\min L(f(X), Y) - \beta \cdot I(f(X); T)$$
 where $L$ is some loss (e.g. BCE) and $I$ is the mutual information. This objective is ubiquitous in fairness, invariance, disentangled representation learning, domain adaptation, etc. In the figure above, $Y$ is the digit and $T$ is the color.  
 
-Traditionally we need to (re-)estimate $I$ first before every update to $f$, which is usually done by training a neural net. This leads to an annoying minmax problem similar to GAN. We show that minmax learning is indeed not needed.
+Traditionally we need to (re-)estimate $I$ first before every update to $f$. We show that to minimise $I$ we need not to estimate it.
 
 
 ## Materials
