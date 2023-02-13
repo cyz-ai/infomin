@@ -8,7 +8,12 @@ This repository provides a PyTorch implementation of "Scalable Infomin Learning"
 
 
 ## Introduction
-Do we really need to estimate mutual information in order to minimise it? No!
+We consider learning representation with the following objective:
+$$
+  \min L(f(X), Y) - \beta I(f(X); T)
+$$
+where $$L$$ is some loss and $$I$$ is the mutual information. This objective has wide applications in fairness (T = sensitive attribute), disentangled representation learning (T = some generative factor), domain adaptation (T = domain indicator), etc. We show that in order to minimise $$I$$ above we really need not to estimate it. 
+
 
 
 ## Materials
@@ -28,6 +33,8 @@ Do we really need to estimate mutual information in order to minimise it? No!
 * Pytorch 1.12.1
 * Torchvision 0.13.1
 * Numpy, scipy, matplotlib
+We recommend to use conda to update library dependence. 
+
 
 
 
