@@ -17,6 +17,8 @@ where $L$ is some loss (e.g. BCE) and $I$ is the mutual information. This object
 
 We show that to minimise $I(f(X); T)$ above, we really need not to estimate it, which is challenging. Rather, we can simply consider a random 'slice' of $I(f(X); T)$ in each mini-batch during learning, which is much easier to estimate.
 
+As byproduct, this project also implements a set of methods for assessing $Z \perp T$ for vectors
+
 <!---
 To optimise this objective, traditionally we need to (re-)estimate $I$ before every update to $f$. However estimating $I$ is challenging. We show to minimise $I$ we indeed need not to estimate it: just consider random `slices' of it is enough.
 --->
