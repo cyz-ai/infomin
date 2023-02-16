@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from . import base
 
 
-class ClubInfominLayer(base.BaseInfominLayer):
+class ClubInfominLayer(base.ParametricInfoEstimator):
     """ sub-network used in infomin, trained by SGD """
     def __init__(self, dim_z, dim_y, hidden_size=200, hyperparams={}):
         super().__init__(hyperparams=hyperparams)
@@ -24,7 +24,7 @@ class ClubInfominLayer(base.BaseInfominLayer):
     def learn(self, x, y):
         self.to(x.device)
         self.mode = 'learn'
-        ret = base.OptimizationHelper.optimize(self, x, y)
+        ret = super().learn(x, y)
         self.mode = 'eval'
         return ret
 
@@ -84,3 +84,8 @@ class CLUB(nn.Module):  # CLUB: Mutual Information Contrastive Learning Upper Bo
 
     def learning_loss(self, x_samples, y_samples):
         return -self.log_likelihood(x_samples, y_samples)
+
+    
+def estimate(x, y, club_net):
+    club_net.mode = 'eval'
+    return club_net.objective_func(x, y)

@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from . import base
 
 
-class TCInfominLayer(base.BaseInfominLayer):
+class TCInfominLayer(base.ParametricInfoEstimator):
     '''
         sub-network used in infomin learning, estimate I(Z; T) by a classifier
     '''
@@ -29,13 +29,13 @@ class TCInfominLayer(base.BaseInfominLayer):
         return out
 
     def objective_func(self, x, y):
-        return -TC(x, y, self)
+        return -estimate(x, y, self)
 
     def learn(self, x, y):
-        return base.OptimizationHelper.optimize(self, x, y)
+        return super().learn(x, y)
 
 
-def TC(z, y, critic):
+def estimate(z, y, critic):
     m, d = z.size()
     idx_neg1 = torch.randperm(m).cpu().numpy().tolist()
     idx_neg2 = torch.randperm(m).cpu().numpy().tolist()

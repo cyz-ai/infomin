@@ -1,16 +1,17 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import utils_data
 
 from . import base
 
 
-class RenyiInfominLayer(base.BaseInfominLayer):
+class RenyiInfominLayer(base.ParametricInfoEstimator):
     '''
         sub-network used in infomin, trained by SGD
     '''
     def __init__(self, architecture, hyperparams):
-        super().__init__()
+        super().__init__(hyperparams=hyperparams)
         self.main = nn.Sequential(
             *(nn.Linear(architecture[i], architecture[i + 1], bias=True) for i in range(len(architecture) - 2)),
         )
@@ -35,17 +36,17 @@ class RenyiInfominLayer(base.BaseInfominLayer):
 
     # the neural renyi value
     def objective_func(self, z1, z2):
-        return renyi_min_neural(self, z1, z2)
+        return estimate(self, z1, z2)
 
     def learn(self, z1, z2):
-        return base.OptimizationHelper.optimize(self, z1, z2)
+        return super().learn(z1, z2)
 
 
-def renyi_min_neural(adv_layer, z, y, detach=False):
+def estimate(network, z, y, detach=False):
     n, d = z.size()
-    z, y = base.standardize_(z), base.standardize_(y)
-    y2 = adv_layer(z)
-    y2 = base.standardize_(y2, detach=detach)
+    z, y = utils_data.standardize_(z), utils_data.standardize_(y)
+    y2 = network(z)
+    y2 = utils_data.standardize_(y2, detach=detach)
     yy = (y * y2).mean(dim=0)
     corr = yy.abs()
     mi = corr.mean()

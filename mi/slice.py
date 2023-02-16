@@ -2,18 +2,19 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import utils_data
 
 from . import base
 
 
-class SliceInfominLayer(base.BaseInfominLayer):
+class SliceInfominLayer(base.ParametricInfoEstimator):
     '''
         sub-network used in infomin, based on slicing
     '''
     def __init__(self, architecture, hyperparams={}):
         super().__init__(hyperparams=hyperparams)
         self.architecture = architecture
-        self.n_slice = hyperparams.get('n_slice', 250)
+        self.n_slice = hyperparams.get('n_slice', 200)
         self.solver_mode = hyperparams.get('solver_mode', 'CCA')
         self.slice_mode = hyperparams.get('slice_mode', 'sphere')
 
@@ -34,7 +35,7 @@ class SliceInfominLayer(base.BaseInfominLayer):
     def forward(self, z):
         zz = self.features(z)  # n*(3S+1), S = n_slice
         out = self.out(zz)
-        return out  # n*K, K = output dim
+        return out             # n*K, K = output dim
 
     def features(self, z, mode=1):
         n, d = z.size()
@@ -45,9 +46,9 @@ class SliceInfominLayer(base.BaseInfominLayer):
         return z
 
     def solve_CCA(self, z1, z2):
-        z1_train, z2_train, z1_val, z2_val = base.OptimizationHelper.divide_train_val(z1, z2)
+        z1_train, z2_train, z1_val, z2_val = utils_data.divide_train_val(z1, z2)
         # [1]. compute slices
-        Z, Y = base.standardize_(z1_train), base.standardize_(z2_train)
+        Z, Y = utils_data.standardize_(z1_train), utils_data.standardize_(z2_train)
         Z = self.features(Z, mode=1).detach().cpu().numpy()
         Y = self.features(Y, mode=2).detach().cpu().numpy()
         # [2]. run CCA
@@ -62,17 +63,14 @@ class SliceInfominLayer(base.BaseInfominLayer):
         return mi_train, mi_val
 
     def solve_SGD(self, z1, z2):
-        return base.OptimizationHelper.optimize(self, z1, z2)
+        return super().learn(z1, z2)
 
     def objective_func(self, z1, z2):
-        z1, z2 = base.standardize_(z1), base.standardize_(z2)
+        z1, z2 = utils_data.standardize_(z1), utils_data.standardize_(z2)
         z = self.features(z1, mode=1)
         y = self.features(z2, mode=2)
-        if self.solver_mode == 'CCA':
-            ZZ, YY = torch.matmul(z - self.m1, self.w1), torch.matmul(y - self.m2, self.w2)
-        else:
-            ZZ, YY = z, y
-        ZZ, YY = base.standardize_(ZZ), base.standardize_(YY)
+        ZZ, YY = torch.matmul(z - self.m1, self.w1), torch.matmul(y - self.m2, self.w2)
+        ZZ, YY = utils_data.standardize_(ZZ), utils_data.standardize_(YY)
         ret = (ZZ * YY).mean(dim=0).abs()
         return ret
 
@@ -141,8 +139,8 @@ class linear_cca():
             A and B: the linear transformation matrices
             mean1 and mean2: the means of data for both views
         """
-        r1 = 5e-4
-        r2 = 5e-4
+        r1 = 1e-3
+        r2 = 1e-3
 
         m = H1.shape[0]
         o1 = H1.shape[1]
