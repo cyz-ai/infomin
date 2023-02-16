@@ -58,10 +58,11 @@ Please run the following script to download the PIE dataset (contributed by [htt
 ```
 bash scripts/download_pie.sh
 ```
+For fairness experiments, the data is in the /data folder.
 
 
 
-## MI estimators/proxies
+## MI estimators/independence tests
 
 at /mi
 
@@ -70,7 +71,7 @@ at /mi
 * Neural Total Correlation
 * Neural Renyi Correlation
 * CLUB
-* Sliced independence testing (*ours)
+* Sliced mutual information
 
 
 
