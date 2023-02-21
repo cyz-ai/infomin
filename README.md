@@ -26,7 +26,7 @@ To optimise this objective, traditionally we need to (re-)estimate $I$ before ev
 --->
 
 
-See also the materials: [Slides](materials/slides.pdf), [Poster](materials/poster.png), [Demo](demo.ipynb). The demo is a minimalist jupyter notebook.
+See also the followiing materials: [Poster](materials/poster.png), [Slides](materials/slides.pdf), [Demo](demo.ipynb). The demo is a minimalist jupyter notebook for trying.
 
 
 
