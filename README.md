@@ -3,7 +3,7 @@
 <p align="center"><img width="60%" src="materials/front.png" /></p>
 
 --------------------------------------------------------------------------------
-This repository provides a PyTorch implementation of the paper ["Scalable Infomin Learning"](https://openreview.net/pdf?id=Ojakr9ofova), NeurIPS 2022.
+This repository provides a PyTorch implementation of the paper ["Scalable Infomin Learning"](https://arxiv.org/pdf/2302.10701.pdf), NeurIPS 2022.
 
 
 
@@ -12,7 +12,7 @@ This repository provides a PyTorch implementation of the paper ["Scalable Infomi
 
 ## Introduction
 We consider learning representation with the following objective:
-$$\min L(f(X), Y) - \beta \cdot I(f(X); T)$$
+$$\min L(f(X), Y) + \beta \cdot I(f(X); T)$$
 where $L$ is some loss (e.g. classification loss) and $I$ is the mutual information. This objective is ubiquitous in fairness, invariance, disentanglement, domain adaptation, etc. In the figure above, $Y$ is the digit and $T$ is the color.  
 
 We show that to minimise $I(f(X); T)$ above, we really need not to estimate it, which could be challenging. Rather, we can simply consider a random 'slice' of $I(f(X); T)$ during mini-batch learning, which is much easier to estimate.
@@ -72,6 +72,7 @@ at /mi
 
 
 
+
 ## Applications
 
 at /tasks
@@ -79,6 +80,24 @@ at /tasks
 * Fairness
 * Disentangled representation learning
 * Domain adaptation
+
+
+
+
+## Citation
+If you find our paper / repository helpful, please consider citing:
+```
+@article{chen2023scalable,
+  title={Scalable Infomin Learning},
+  author={Chen, Yanzhi and Sun, Weihao and Li, Yingzhen and Weller, Adrian},
+  journal={arXiv preprint arXiv:2302.10701},
+  year={2023}
+}
+```
+
+
+
+
 
 ## Results
 
