@@ -13,9 +13,9 @@ This repository provides a PyTorch implementation of the paper ["Scalable Infomi
 ## Introduction
 We consider learning representation with the following objective:
 $$\min L(f(X), Y) - \beta \cdot I(f(X); T)$$
-where $L$ is some loss (e.g. BCE) and $I$ is the mutual information. This objective is ubiquitous in fairness, invariance, disentangled representation learning, domain adaptation, etc. In the figure above, $Y$ is the digit and $T$ is the color.  
+where $L$ is some loss (e.g. classification loss) and $I$ is the mutual information. This objective is ubiquitous in fairness, invariance, disentanglement, domain adaptation, etc. In the figure above, $Y$ is the digit and $T$ is the color.  
 
-We show that to minimise $I(f(X); T)$ above, we really need not to estimate it, which is challenging. Rather, we can simply consider a random 'slice' of $I(f(X); T)$ in each mini-batch during learning, which is much easier to estimate.
+We show that to minimise $I(f(X); T)$ above, we really need not to estimate it, which could be challenging. Rather, we can simply consider a random 'slice' of $I(f(X); T)$ during mini-batch learning, which is much easier to estimate.
 
 <!---
 As byproduct, this project also implements a set of methods for assessing $Z \perp T$ for vectors
