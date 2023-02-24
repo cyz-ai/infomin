@@ -31,6 +31,7 @@ def train(hyperparam, estimator, x, y, net, DATASET):
     z_learnt, _ = net.encode(x, details=True)
     z_learnt = z_learnt.clone().detach()
     infer_net = net.predict_layer
+    infer_net.max_iteration = 1000
     infer_net.train()
     loss = infer_net.learn(z_learnt, y)
     print('[val] rho*(Z;Y)=', -loss)   
@@ -83,7 +84,7 @@ def test(hyperparam, estimator, x_test, y_test, net, DATASET):
     
 
 
-## Minmax training of neural net    
+## Minmax training of neural net
 class NNMinmaxOptimizer(nn.Module):
     
     @staticmethod 
@@ -91,7 +92,7 @@ class NNMinmaxOptimizer(nn.Module):
         # hyperparams 
         T = 500 if not hasattr(net.hyperparams, 'max_iteration') else net.hyperparams.max_iteration
         early_stop = True if not hasattr(net.hyperparams, 'early_stop') else net.hyperparams.early_stop
-  
+
         # divide train & val         
         x_train, y_train, x_val, y_val = utils_data.divide_train_val(x, y)
  
@@ -102,15 +103,15 @@ class NNMinmaxOptimizer(nn.Module):
         # main loop
         best_val_obj, best_model_state_dict, best_t = -math.inf, None, -1
         for t in range(T):
+            t0 = time.time()  
+            
             # shuffle the data
             idx = torch.randperm(len(x_train)) 
             x_train, y_train = x_train[idx], y_train[idx]
 
             # max-step
-            t0 = time.time()  
             net.train()  
             adv_loss = net.train_infomin_layer(x, y)
-            t1 = time.time()
  
             # record the best model
             net.eval()  
@@ -122,7 +123,8 @@ class NNMinmaxOptimizer(nn.Module):
             net.train()
             x_chunks, y_chunks = utils_data.get_trunks(x_train, y_train, net.bs)
             for i in range(len(x_chunks)):
-                optimizer.zero_grad()            
+                optimizer.zero_grad()     
+                net.train_infomin_layer(x_chunks[i], y_chunks[i])                # <-- inside the min step, we can also update the adversary
                 loss = -net.objective_func(x_chunks[i], y_chunks[i])
                 loss.backward()
                 optimizer.step()
@@ -131,14 +133,14 @@ class NNMinmaxOptimizer(nn.Module):
             sched.step(loss_val)
 
             # report
+            t1 = time.time()
             if t%(T//10) == 0: 
-                print('t=', t, 'loss=', loss.item(), 'loss val=', loss_val.item(), 'adv_loss=', adv_loss, 'time=', t1-t0)
+                print('t=', t, 'loss=', loss.item(), 'loss val=', loss_val.item(), 'adv_loss=', adv_loss, 'time per iter=', t1-t0)
 
         # early stopping
         if early_stop: net.load_state_dict(best_model_state_dict)
         print('best val loss=', best_val_obj, 't=', t, 'best_t=', best_t, 'early stopping=', early_stop)
         return best_val_obj
-    
     
     
     
