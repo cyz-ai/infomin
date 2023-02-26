@@ -69,6 +69,7 @@ at /mi
 * CLUB
 * Sliced mutual information
 
+These estimators/tests are used to quantify $I(f(X); T)$ in the objective function. 
 
 
 
@@ -81,6 +82,7 @@ at /tasks
 * Disentangled representation learning
 * Domain adaptation
 
+Different tasks are made maximally isolated to each other. Please check each folder. 
 
 
 
