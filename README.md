@@ -13,7 +13,7 @@ This repository provides a PyTorch implementation of the paper ["Scalable Infomi
 ## Introduction
 We consider learning representation with the following objective:
 $$\min L(f(X), Y) + \beta \cdot I(f(X); T)$$
-where $L$ is some loss (e.g. classification loss) and $I$ is the mutual information. This objective is ubiquitous in invariance, algorithmic fairness, disentangled representation learning, domain adaptation, etc.
+where $L$ is some loss (e.g. classification loss) and $I$ is the mutual information. This objective is ubiquitous in fairness, disentangled representation learning, domain adaptation, invariance, etc.
 
 We show that to minimise $I(f(X); T)$ above, we really need not to estimate it, which could be challenging. Rather, we can simply consider a random 'slice' of $I(f(X); T)$ during mini-batch learning, which is much easier to estimate.
 
